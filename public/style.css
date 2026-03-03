@@ -163,4 +163,47 @@ button[type="submit"]:active {
         inset 0 2px 6px rgba(0,0,0,.5);
 }
 
+/* cursor by Me4Hik START - Экран результата в стиле Pip-Boy */
+
+/* Обёртка экрана — утопленная панель с зеленоватым свечением */
+.result-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: .2rem;
+    padding: .7rem 1rem .8rem;
+    background: #0a0f04;
+    border: 1.5px solid var(--copper);
+    border-radius: 6px;
+    box-shadow:
+        var(--inset-shadow),
+        0 0 12px rgba(124,173,58,.15),  /* зеленоватое внутреннее свечение */
+        inset 0 0 18px rgba(0,0,0,.6);
+    /* Горизонтальные полосы сканирования — имитация ЭЛТ-монитора */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0,0,0,.18) 3px,
+        rgba(0,0,0,.18) 4px
+    );
+}
+
+/* Маленькая строка с выражением: "3 + 5 =" */
+.result-expr {
+    font-size: 1rem;
+    color: #4a7a20;
+    letter-spacing: .08em;
+    opacity: .85;
+}
+
+/* Большое итоговое число */
+.result-value {
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--green-dim);
+    text-shadow: 0 0 10px rgba(124,173,58,.8), 0 0 3px rgba(124,173,58,.5);
+    letter-spacing: .05em;
+}
+
 /* cursor by Me4Hik END */
