@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- cursor by Me4Hik START - Netlify-зеркало стимпанк-калькулятора (Vanilla JS, без PHP) -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор для Сергея</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div>
+        <h2>&#9881; Калькулятор &#9881;</h2>
+
+        <form id="calc-form">
+            <input type="number" id="num1" placeholder="// Первое число" required>
+
+            <select id="operation">
+                <option value="+">[ + ]  Плюс</option>
+                <option value="-">[ - ]  Минус</option>
+                <option value="*">[ × ]  Умножить</option>
+                <option value="/">[ ÷ ]  Разделить</option>
+            </select>
+
+            <input type="number" id="num2" placeholder="// Второе число" required>
+
+            <button type="submit">&#9658; Посчитать</button>
+
+            <!-- Экран результата — скрыт до первого расчёта -->
+            <div class="result-screen hidden" id="result-screen">
+                <span class="result-expr" id="result-expr"></span>
+                <span class="result-value" id="result-value"></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    /* cursor by Me4Hik START - Логика калькулятора на Vanilla JS (порт PHP-версии) */
+
+    document.getElementById('calc-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // не перезагружаем страницу — всё делаем в JS
+
+        var a         = parseFloat(document.getElementById('num1').value);
+        var b         = parseFloat(document.getElementById('num2').value);
+        var operation = document.getElementById('operation').value;
+        var result;
+
+        // Тот же switch, что и в PHP-версии
+        switch (operation) {
+            case '+': result = a + b; break;
+            case '-': result = a - b; break;
+            case '*': result = a * b; break;
+            case '/':
+                result = (b !== 0) ? a / b : 'ERR: DIV/0';
+                break;
+            default:
+                result = 'ERR';
+        }
+
+        // Форматируем число: убираем лишние нули после запятой (как number_format в PHP)
+        var display = (typeof result === 'number')
+            ? parseFloat(result.toFixed(8)).toString()
+            : result;
+
+        // Строка выражения: "3 + 5 ="
+        var exprStr = a + ' ' + operation + ' ' + b + ' =';
+
+        // Выводим в DOM
+        document.getElementById('result-expr').textContent  = exprStr;
+        document.getElementById('result-value').textContent = display;
+
+        // Показываем экран (убираем класс hidden)
+        document.getElementById('result-screen').classList.remove('hidden');
+    });
+
+    /* cursor by Me4Hik END */
+    </script>
+</body>
+</html>
+<!-- cursor by Me4Hik END -->
